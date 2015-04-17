@@ -256,7 +256,13 @@
 			message_admins("[key_name_admin(user)] triggered a fueltank explosion.")
 			log_game("[key_name(user)] triggered a fueltank explosion.")
 			user << "<span class='warning'>That was stupid of you.</span>"
-			O.ex_act()
+			//O.ex_act()
+			//Sets the asshole on fire instead of blowing it up
+			if(istype(user, /mob/living))
+				var/mob/living/carbon/human/M = user
+				M << "<span class='danger'>You accidentally light the fuel on fire, a gout of flame envelops you!</span>"
+				M.adjust_fire_stacks(20)
+				M.IgniteMob()
 			return
 
 	if(welding)

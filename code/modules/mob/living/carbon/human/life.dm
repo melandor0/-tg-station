@@ -287,6 +287,15 @@
 	if(dna)
 		dna.species.handle_chemicals_in_body(src)
 
+	//Starvation
+	if(nutrition < 20)
+		if(starwarn == 0)
+			src << "<span class='userdanger'>Hunger is driving you crazy, you're literally starving!</span>"
+			starwarn = 60
+		starwarn -= 1
+
+	if(nutrition == 0)
+		adjustCloneLoss(0.1)
 	return //TODO: DEFERRED
 
 /mob/living/carbon/human/handle_vision()
@@ -324,7 +333,6 @@
 
 				// make it so you can only puke so fast
 				lastpuke = 0
-
 
 /mob/living/carbon/human/handle_changeling()
 	if(mind && hud_used)
